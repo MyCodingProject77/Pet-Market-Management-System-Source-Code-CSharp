@@ -1,0 +1,95 @@
+
+
+      using System.Data.SqlClient;
+
+
+    
+
+      Connection
+
+      SqlConnection con = new SqlConnection(@"Data Source=DESKTOP-HEEKBHE\SQLEXPRESS;Initial Catalog=PetDB;Integrated Security=True;Trusted_Connection=True;TrustServerCertificate=True");
+
+
+
+     Save Code
+
+
+     SqlConnection con = new SqlConnection(@"Data Source=DESKTOP-HEEKBHE\SQLEXPRESS;Initial Catalog=PetDB;Integrated Security=True;Trusted_Connection=True;TrustServerCertificate=True");
+
+
+con.Open();
+
+SqlCommand cnn = new SqlCommand("insert into pet Values(@clientid,@clientname,@address,@phone,@petname,@price,@gender,@type,@breed,@age,@date)", con);
+
+cnn.Parameters.AddWithValue("@ClientID", int.Parse(textBox1.Text));
+cnn.Parameters.AddWithValue("@ClientName", textBox2.Text);
+
+cnn.Parameters.AddWithValue("@Address", textBox3.Text);
+cnn.Parameters.AddWithValue("@Phone", textBox4.Text);
+cnn.Parameters.AddWithValue("@PetName",textBox5.Text);
+cnn.Parameters.AddWithValue("@Price", int.Parse(textBox6.Text));
+cnn.Parameters.AddWithValue("@Gender", comboBox1.GetItemText(comboBox1.SelectedItem));
+cnn.Parameters.AddWithValue("@Type", comboBox2.GetItemText(comboBox2.SelectedItem));
+cnn.Parameters.AddWithValue("@Breed", textBox7.Text);
+cnn.Parameters.AddWithValue("@Age", int.Parse(textBox8.Text));
+cnn.Parameters.AddWithValue("@Date", dateTimePicker1.Value);
+
+cnn.ExecuteNonQuery();
+con.Close();
+MessageBox.Show("Data Saved");
+
+
+
+     Add Code
+
+     SqlConnection con = new SqlConnection(@"Data Source=DESKTOP-HEEKBHE\SQLEXPRESS;Initial Catalog=PetDB;Integrated Security=True;Trusted_Connection=True;TrustServerCertificate=True");
+
+
+con.Open();
+SqlCommand cnn = new SqlCommand("Select * from pet", con);
+
+SqlDataAdapter da = new SqlDataAdapter(cnn);
+DataTable table = new DataTable();
+da.Fill(table);
+
+dataGridView1.DataSource = table;
+
+
+
+    Delete Code
+
+
+    SqlConnection con = new SqlConnection(@"Data Source=DESKTOP-HEEKBHE\SQLEXPRESS;Initial Catalog=PetDB;Integrated Security=True;Trusted_Connection=True;TrustServerCertificate=True");
+
+
+con.Open();
+
+SqlCommand cnn = new SqlCommand("delete pet where clientid=@clientid", con);
+
+cnn.Parameters.AddWithValue("@ClientID", int.Parse(textBox1.Text));
+
+
+cnn.ExecuteNonQuery();
+con.Close();
+MessageBox.Show("Data Deleted");
+
+
+
+   Form1 Load Code
+
+
+   SqlConnection con = new SqlConnection(@"Data Source=DESKTOP-HEEKBHE\SQLEXPRESS;Initial Catalog=PetDB;Integrated Security=True;Trusted_Connection=True;TrustServerCertificate=True");
+
+
+con.Open();
+SqlCommand cnn = new SqlCommand("Select * from pet", con);
+
+SqlDataAdapter da = new SqlDataAdapter(cnn);
+DataTable table = new DataTable();
+da.Fill(table);
+
+dataGridView1.DataSource = table;
+
+   
+
+      
